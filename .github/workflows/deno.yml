@@ -23,7 +23,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./discord-bot-deno
+        working-directory: ./impl-deno
 
     steps:
       - name: Setup repo
