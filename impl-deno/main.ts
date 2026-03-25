@@ -1,18 +1,11 @@
-import {
-	Client,
-	event,
-	Intents,
-	slash,
-	SlashCommandInteraction,
-} from 'harmony';
+import { Client, event, Intents, slash, SlashCommandInteraction } from 'harmony';
 import { arithmetic, factorial, trigonometry } from './maths.ts';
 import { srvID, strings, token } from './strings.ts';
 import { commands } from './commands.ts';
 import { getQuote } from './quote.ts';
 
-function getCmdOption(interaction: SlashCommandInteraction, optionId: string) {
-	return interaction.data.options.find((option) => option.name == optionId)!
-		.value;
+function getCmdOption(i: SlashCommandInteraction, id: string) {
+	return i.data.options.find((option) => option.name == id)!.value;
 }
 
 class AZULI extends Client {
@@ -27,7 +20,7 @@ class AZULI extends Client {
 	}
 
 	@slash('ping')
-	ping(i: SlashCommandInteraction) {
+	cmd_ping(i: SlashCommandInteraction) {
 		i.respond({
 			embeds: [{
 				author: { name: 'United Nations' },
@@ -40,7 +33,7 @@ class AZULI extends Client {
 	}
 
 	@slash('spell')
-	spell(i: SlashCommandInteraction) {
+	cmd_spell(i: SlashCommandInteraction) {
 		const input: string = getCmdOption(i, 'input');
 		const spelt = input.split('').toString();
 
@@ -48,7 +41,7 @@ class AZULI extends Client {
 	}
 
 	@slash('quote')
-	async quote(i: SlashCommandInteraction) {
+	async cmd_quote(i: SlashCommandInteraction) {
 		const { author, text } = await getQuote();
 
 		i.respond({
@@ -66,11 +59,10 @@ class AZULI extends Client {
 	}
 
 	@slash('calculate')
-	calculate(i: SlashCommandInteraction) {
+	cmd_calculate(i: SlashCommandInteraction) {
 		const num1 = getCmdOption(i, 'num1');
 		const num2 = getCmdOption(i, 'num2');
 		const oprd = getCmdOption(i, 'operator');
-
 		const result = arithmetic(num1, num2, oprd);
 
 		i.respond({
@@ -84,10 +76,9 @@ class AZULI extends Client {
 	}
 
 	@slash('trigonometry')
-	calculateTrig(i: SlashCommandInteraction) {
+	cmd_trigonometry(i: SlashCommandInteraction) {
 		const type = getCmdOption(i, 'type');
 		const rad = getCmdOption(i, 'radian');
-
 		const result = trigonometry(type, rad);
 
 		i.respond({
@@ -100,9 +91,8 @@ class AZULI extends Client {
 	}
 
 	@slash('factorial')
-	factorial(i: SlashCommandInteraction) {
+	cmd_factorial(i: SlashCommandInteraction) {
 		const input = getCmdOption(i, 'number');
-
 		const result = factorial(input);
 
 		i.respond({
