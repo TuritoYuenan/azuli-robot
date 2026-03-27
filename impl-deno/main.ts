@@ -14,7 +14,7 @@ class AZULI extends Client {
 		commands.forEach((command) => {
 			this.interactions.commands.create(command, srvID)
 				.then((cmd) => console.log(`🟩 /${cmd.name} ONLINE`))
-				.catch((cmd) => console.log(`🔴 /${cmd.name} FAILED`));
+				.catch((e) => console.log(`🔴 /${e.name} FAILED`));
 		});
 		console.log(`AZULI is Online: https://discord.com/channels/${srvID}`);
 	}

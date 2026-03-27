@@ -27,7 +27,7 @@ export function arithmetic(
 		case Operators.Multiply:
 			return number1 * number2;
 		case Operators.Divide:
-			return (number2 === 0) ? NaN : number1 / number2
+			return (number2 === 0) ? Number.NaN : number1 / number2
 	}
 }
 

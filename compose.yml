@@ -1,0 +1,8 @@
+services:
+  azuli:
+    build: ./impl-deno
+    container_name: azuli
+    restart: on-failure:5
+    environment:
+      - TOKEN=${TOKEN}
+      - SERVER=${SERVER}

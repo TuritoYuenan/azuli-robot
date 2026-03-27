@@ -1,16 +1,17 @@
 FROM denoland/deno:alpine AS base
 
-# The port that your application listens to.
-EXPOSE 1993
-
 # Change working directory to /app
 WORKDIR /app
 
-# These steps will be re-run upon each file change in your working directory:
-COPY . .
-
-# Compile the main app so that it doesn't need to be compiled each startup/entry.
+# Copy source code and cache dependencies
+COPY deno.json deno.lock ./
+COPY *.ts .
 RUN deno cache ./main.ts
 
+# Use a non-root user
+RUN addgroup -S deno && adduser -S deno -G deno
+USER deno
+
 # Run Discord bot
+EXPOSE 1993
 CMD ["run", "--allow-all", "./main.ts"]

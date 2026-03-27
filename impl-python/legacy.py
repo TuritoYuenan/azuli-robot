@@ -39,7 +39,6 @@ async def echo(ctx, *, input): await ctx.send(f'<@{ctx.author.id}>: '+ input)
 @robot.hybrid_command(name='spell')
 async def spell(ctx, word): await ctx.send([letter for letter in word])
 
-"""
 @robot.hybrid_command(name='random')
 async def generate(ctx, type, low = 0, high = 2**31):
 	if type == 'number': await ctx.send(lib.ranRange(low, high))
@@ -64,7 +63,6 @@ async def turito_here(ctx):
 	if   ctx.author.id == lib.frends['Turito']:  await ctx.send('oh hi dad')
 	elif ctx.author.id == lib.frends['Shannon']: await ctx.send(lib.ShannonNotDad)
 	else: await ctx.send('But you are not my dad!')
-"""
 
 @robot.hybrid_command(name='calculate')
 async def calculate(ctx, func, input = 1.0):
